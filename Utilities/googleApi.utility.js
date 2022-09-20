@@ -7,7 +7,7 @@ const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 
 // const REFRESH_TOKEN = '1//04OfBSJsGrP2FCgYIARAAGAQSNwF-L9Irve5G19O_uh5mFuF9ITCv-ynaPjlxug5Vvko3NsnEpCLBG230K0IvmMz6g_6BwLHJRSo';
-const REFRESH_TOKEN = "1//04lDcKGnp4QJUCgYIARAAGAQSNwF-L9IrNHILCzM4KD9mz5AfeRPyMAZiJWl1ssWmHW6fArsT8dM_AlGKNIjr0v_AfC0kwxgWdHo";
+const REFRESH_TOKEN = "1//04BSdvUcokVRgCgYIARAAGAQSNwF-L9IrAZ05PNg6WgVuseXXcSWtWToImeWTEorFaEt4RvdSp_loEIGFGoNHnXS_AndD43EiXHE";
 
 const oauth2Client = new google.auth.OAuth2(
     CLIENT_ID,
@@ -52,7 +52,7 @@ exports.deleteFile=async()=> {
       });
       console.log(response.data, response.status);
     } catch (error) {
-      console.log(error.message);
+      console.log("error in googleApi.utility.js File",error.message);
     }
   }
   
@@ -76,12 +76,12 @@ exports.generatePublicUrl=async()=> {
         fileId: fileId,
         fields: 'webViewLink, webContentLink',
       });
-      console.log("eeeeeee",result)
+      ///console.log("eeeeeee",result)
       const {data}=result
-      console.log("gooogle Api",data);
+     // console.log("gooogle Api",data);
       return await data;
     } catch (error) {
-      console.log(error.message);
+      console.log("error in googleApi.utility.js File",error.message);
     }
    // return await data;
   }

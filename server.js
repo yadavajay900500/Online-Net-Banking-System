@@ -51,7 +51,9 @@ function global_Error_Handler() {
  app.use((err, req, res, next) => {
     const errorStatus = req.status || 500;
      const error = err.message && [err.message] || err || "Internal Server Error";
-     res.status(errorStatus).send({error:"pppppppp"})
+     console.log("Global_Error_Handler",error)
+     res.status(errorStatus).send({error:"Global Error Handler"})
   })
  }
  module.exports = app;
+ 

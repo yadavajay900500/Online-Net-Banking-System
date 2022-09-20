@@ -21,6 +21,7 @@ exports.add_validator = () => {
   }
   //isDate({format: 'DD-MM-YYYY'}).
 exports.signin_validator= () => {
+  console.log("validation file")
     return [
       check('password')
         .isLength({ min: 5 })

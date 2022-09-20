@@ -6,7 +6,7 @@ exports.result_validator = (req, res, next) => {
 
   if (hasErrors) {
     const errorList = result.array()?.map((obj) => {
-      console.log("Error in validation")
+      console.log("Error in validation" `${obj.msg}`)
       return `Eorror in Validation----> ${obj.msg} `;
     });
     req.status = 400;

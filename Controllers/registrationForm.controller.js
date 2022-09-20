@@ -11,6 +11,7 @@ const { googleDrive, generatePublicUrl } = require("../Utilities/googleApi.utili
 const saltRounds = 2
 
 
+
 exports.signupForExamination = async (req, res, next) => {
   req.body.phone = "+91" + req.body.phone
   req.body.status = "review"
@@ -42,7 +43,7 @@ exports.signupForExamination = async (req, res, next) => {
         const verifyAccount = generate_token(result._id, `${60 * 10}s`);
         //req.body.otpExpireTime = verifyAccount;
         console.log("1234567////", req.body)
-        const smsresult = await sendMobileSMS(msg, phone);
+       //const smsresult = await sendMobileSMS(msg, phone);
         const newData = await  userschema.updateMany({ email }, {
           $set: {
             otp:val,
@@ -53,8 +54,8 @@ exports.signupForExamination = async (req, res, next) => {
         res.status(200).send("otp are send in your register Mobile No")
       }
       catch (err) {
-        console.log("something is wrong",err)
-        res.status(402).send("Something is wrong")
+        console.log("Some Error in registrationForm.controller.js File",err)
+        res.status(402).send("Some Error in registrationForm.controller.js File")
       }
       // newData.save((err,result)=>{
       //   if(err){
@@ -173,22 +174,26 @@ exports.getuserController = async (req, res) => {
 }
 
 exports.signinForExamination = async (req, res) => {
-  const db_email = await userschema.findOne({ email: req.body.email })
-  console.log("db_email", db_email)
-  const verification = db_email.isVerified
+  console.log("eeeeeee",req.body)
+  const {bankAccountNo}=req.body
+  const userAccount = await userschema.findOne({bankAccountNo})
+  console.log("db_email", userAccount)
+  const verification = userAccount.isVerified
+  console.log("vvccccccccccccc",verification)
   if (!verification) {
-    res.send({ varify_Status: " please verify your account" })
+    res.send({ varify_Status: " please verify your  bbbbb account" })
   }
   else {
-    const match_pass = await bcrypt.compare(req.body.password, db_email.password)
+    const match_pass = await bcrypt.compare(req.body.password, userAccount.password)
     if (match_pass) {
-      const token = generate_token(req.body?.userInfo);
-      res.status(200).send({ userInfo: req.body.userInfo, token });
+      const token = generate_token(req.body?.userAccount);
+      res.status(200).send({ userInfo:userAccount, token });
     } else {
       res.status(400).send("Wrong Password")
     }
   }
 }
+
 
 
 exports.forgatPassword = async (req, res) => {
