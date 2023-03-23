@@ -24,7 +24,7 @@ const cors = require('cors');
   })();
   function db_config() {
     Mongoose.connect(
-      "mongodb+srv://ajay:900@cluster0.umyjcyd.mongodb.net/Bank_Account_Details?retryWrites=true&w=majority",
+      "mongodb+srv://..............................mongodb.net/Bank_Account_Details?retryWrites=true&w=majority",
       (err) => {
         if (!err) {
           console.log("DB Connected Successfully");
